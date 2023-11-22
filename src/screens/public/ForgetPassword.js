@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { BODY } from "../../constants/Color";
 import PublicHeader from "../../components/PublicHeader";
 import PublicMain from "../../components/PublicMain";
@@ -8,12 +8,15 @@ import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import PublicImage from "../../constants/Image";
 import { useNavigation } from "@react-navigation/native";
+import { Touchable } from "react-native";
 export default function ForgetPassword() {
     const navigate = useNavigation();
   return (
     <View style={styles.container}>
       <PublicHeader flexAmount={0.25}>
-        
+        <TouchableOpacity onPress={()=>navigate.goBack()} style={{ flexDirection: "row", alignItems: "center" ,padding:20}}>
+            <Image source={PublicImage.back_2} tintColor="white"/>
+        </TouchableOpacity>
       </PublicHeader>
       <PublicMain flexAmount={0.75} paddingAmount={20}>
         <Notice

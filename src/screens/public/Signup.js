@@ -1,18 +1,23 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, Image,TouchableOpacity, View } from "react-native";
 import { CustomStatusBar } from "../../Router";
 import { BODY, GRADIENT_1 } from "../../constants/Color";
 import PublicHeader from "../../components/PublicHeader";
 import PublicMain from "../../components/PublicMain";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
+import PublicImage from "../../constants/Image";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Signup() {
   const navigate = useNavigation();
   return (
     <View style={styles.container}>
-      <PublicHeader flexAmount={0.333}></PublicHeader>
+      <PublicHeader flexAmount={0.333}>
+      <TouchableOpacity onPress={()=>navigate.goBack()} style={{ flexDirection: "row", alignItems: "center" ,padding:20}}>
+            <Image source={PublicImage.back_2} tintColor="white"/>
+        </TouchableOpacity>
+      </PublicHeader>
       <PublicMain flexAmount={0.666}>
         <View style={{ gap: 20, marginBottom: 40 }}>
           <InputField title="Full Name" />

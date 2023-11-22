@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import { BODY } from "../../constants/Color";
 import PublicHeader from "../../components/PublicHeader";
 import PublicMain from "../../components/PublicMain";
@@ -7,10 +7,16 @@ import Notice from "../../components/Notice";
 import InputField from "../../components/InputField";
 import Button from "../../components/Button";
 import PublicImage from "../../constants/Image";
+import { useNavigation } from "@react-navigation/native";
 export default function ChangePassword() {
+    const navigate = useNavigation();
   return (
     <View style={styles.container}>
-      <PublicHeader flexAmount={0.25}></PublicHeader>
+      <PublicHeader flexAmount={0.25}>
+      <TouchableOpacity onPress={()=>navigate.goBack()} style={{ flexDirection: "row", alignItems: "center" ,padding:20}}>
+            <Image source={PublicImage.back_2} tintColor="white"/>
+        </TouchableOpacity>
+      </PublicHeader>
       <PublicMain flexAmount={0.75} paddingAmount={20}>
         <Notice
           title="Set a New password"

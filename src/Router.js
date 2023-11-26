@@ -8,10 +8,13 @@ import {
 import { StatusBar, View } from "react-native";
 import { useState, useEffect } from "react";
 import Login from "./screens/public/Login";
-import SignUp from "./screens/public/Signup";
 import ForgetPassword from "./screens/public/ForgetPassword";
 import ChangePassword from "./screens/private/ChangePassword";
 import OTP from "./screens/public/OTP";
+import { BODY, FILL, FILL_2, GRADIENT_1, GRADIENT_2 } from "./constants/Color";
+import Dashboard from "./screens/private/Dashboard";
+import Signup from "./screens/public/Signup";
+
 export const CustomStatusBar = ({
   backgroundColor,
   barStyle = "light-content",
@@ -49,7 +52,7 @@ const Router = () => {
 //     getProfile();
 //   }, []);
   return (
-    <SafeAreaProvider>
+    <SafeAreaProvider style={{backgroundColor:GRADIENT_2}}>
       <NavigationContainer>
         <CustomStatusBar backgroundColor="transparent" />
         <Stack.Navigator
@@ -61,11 +64,11 @@ const Router = () => {
         >
           {/* <Stack.Screen name="AppSplashScreen" component={AppSplashScreen} /> */}
           <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="SignUp" component={Signup} />
           <Stack.Screen name="OTP" component={OTP} />
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
           <Stack.Screen name="ChangePassword" component={ChangePassword} />
-          {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
+          <Stack.Screen name="Dashboard" component={Dashboard} />
          
           
         </Stack.Navigator>

@@ -9,28 +9,42 @@ import Button from "../../components/Button";
 import PublicImage from "../../constants/Image";
 import { useNavigation } from "@react-navigation/native";
 export default function ChangePassword() {
-    const navigate = useNavigation();
+  const navigate = useNavigation();
   return (
     <View style={styles.container}>
       <PublicHeader flexAmount={0.25}>
-      <TouchableOpacity onPress={()=>navigate.goBack()} style={{ flexDirection: "row", alignItems: "center" ,padding:20}}>
-            <Image source={PublicImage.back_2} tintColor="white"/>
+        <TouchableOpacity
+          onPress={() => navigate.goBack()}
+          style={{ flexDirection: "row", alignItems: "center", padding: 20 }}
+        >
+          <Image source={PublicImage.back_2} tintColor="white" />
         </TouchableOpacity>
       </PublicHeader>
       <PublicMain flexAmount={0.75} paddingAmount={20}>
-        <Notice
-          title="Set a New password"
-          message="Type a new password"
-        />
-        <View style={{ flex: 0.8 ,justifyContent:"space-between"}}>
-          <View style={{ paddingTop: 60,gap:20 }}>
-            <InputField title="Password" secureTextEntry={true}/>
-            <InputField title="Confirm Password" secureTextEntry={true}/>
+        <View style={{ flex: 0.2 }}>
+          <Notice title="Set a New password" message="Type a new password" />
+        </View>
+        <View
+          style={{
+            flex: 0.8,
+            paddingHorizontal: 20,
+            justifyContent: "space-between",
+          }}
+        >
+          <View style={{ flex: 0.6, paddingTop: 50, gap: 20 }}>
+            <InputField title="Password" secureTextEntry={true} />
+            <InputField title="Confirm Password" secureTextEntry={true} />
+            <Button title="Send" />
           </View>
-          <Button title="Send" />
-          <View style={{alignItems:"center"}}>
 
-          <Image source={PublicImage.image_1} />
+          <View
+            style={{
+              flex: 0.3,
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image source={PublicImage.image_1} />
           </View>
         </View>
       </PublicMain>

@@ -12,7 +12,9 @@ export default function Button({title, onPress}) {
       location={[0.25, 0.7, 1]}
       style={styles.container}>
     <TouchableOpacity onPress={onPress}>
-        <Text style={{fontSize:18,color:"#fff",fontWeight:700,letterSpacing:2,textTransform:"uppercase",textAlign:"center"}}>{title}</Text>
+
+        {/* <Text style={{fontSize:18,color:"#fff",fontWeight:700,letterSpacing:2,textTransform:"uppercase",textAlign:"center"}}>{title}</Text> */}
+        <Text style={{fontSize:18,color:"#fff",letterSpacing:2,textTransform:"uppercase",textAlign:"center"}}>{title}</Text>
     </TouchableOpacity>
     </LinearGradient>
   )

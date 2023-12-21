@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import { BODY, FILL, GRADIENT_1 } from "../../constants/Color";
+import { BACKGROUND, FILL, GRADIENT_1 } from "../../constants/Color";
 import PublicHeader from "../../components/PublicHeader";
 import PublicMain from "../../components/PublicMain";
 import Notice from "../../components/Notice";
@@ -23,7 +23,7 @@ export default function ForgetPassword() {
   const navigate = useNavigation();
   const routes = useRoute();
   const [otp, setOTP] = useState("");
-  const [timer, setTimer] = useState(120);
+  const [timer, setTimer] = useState(30);
   const [loading, setLoading] = useState(false);
   const [resendDisabled, setResendDisabled] = useState(true);
 
@@ -53,14 +53,14 @@ export default function ForgetPassword() {
   const handleVerify = async () => {
     try {
       setLoading(true);
-      const res = await postRequestForm(`/api/auth/verifyOTP`, "", {
-        email: "fasif455@gmail.com",
-        otp,
+      const res = await postRequestForm(`/verifyCode`, "", {
+        email: email,
+        code:otp,
       });
-      console.log(res);
+      console.log("opt",res);
       if (res?.result?.status === 200) {
         alert("OTP verified");
-        // navigate.navigate(pathToGo);
+        navigate.navigate(pathToGo);
       } else {
         alert("Invalid OTP");
       }
@@ -74,7 +74,7 @@ export default function ForgetPassword() {
     try {
       setLoading(true);
       const res = await postRequestForm(`/resendCode`, "", {
-        email: "fasif455@gmail.com",
+        email: email,
       });
       if (res?.result?.status === 200) {
         setTimer(120);
@@ -169,6 +169,6 @@ export default function ForgetPassword() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: BODY,
+    backgroundColor: BACKGROUND,
   },
 });

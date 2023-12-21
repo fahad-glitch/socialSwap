@@ -1,6 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { BODY } from "../../constants/Color";
+import { BACKGROUND } from "../../constants/Color";
 import PublicHeader from "../../components/PublicHeader";
 import PublicMain from "../../components/PublicMain";
 import Notice from "../../components/Notice";
@@ -61,6 +61,6 @@ export default function ForgetPassword() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: BODY,
+    backgroundColor: BACKGROUND,
   },
 });

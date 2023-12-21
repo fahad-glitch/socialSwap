@@ -12,7 +12,7 @@ import Button from "../../components/Button";
 import InputField from "../../components/InputField";
 import PublicHeader from "../../components/PublicHeader";
 import PublicMain from "../../components/PublicMain";
-import { BODY, FILL, GRADIENT_1 } from "../../constants/Color";
+import { BACKGROUND, FILL, GRADIENT_1 } from "../../constants/Color";
 import PublicImages from "../../constants/Image";
 import { Formik } from "formik";
 import * as Yup from "yup";
@@ -34,14 +34,20 @@ export default function Login() {
     try {
       setLoading(true);
       const res = await postRequestForm(`/signIn`, "", values);
-      console.log(res);
+      console.log("after Api ", res.result);
       if (res.result.status === 200) {
         setData(res.data);
         console.log("result", res.result.data);
+        alert("Login Successful");
         // navigate.navigate("Home");
+      } else {
+        navigate.navigate("OTP", {
+          email: values.email,
+          pathToGo: "Dashboard",
+        });
       }
     } catch (error) {
-      console.log(error);
+      console.log("login error", error);
     } finally {
       setLoading(false);
     }
@@ -88,7 +94,10 @@ export default function Login() {
                 >
                   <Text style={styles.forgetPassword}>Forget Password</Text>
                 </TouchableOpacity>
-                <Button title="Log in" onPress={handleSubmit} />
+                <Button
+                  title={loading ? "Loading...." : "Log in"}
+                  onPress={handleSubmit}
+                />
               </>
             )}
           </Formik>
@@ -153,7 +162,7 @@ export default function Login() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: BODY,
+    backgroundColor: BACKGROUND,
   },
   forgetPassword: {
     color: GRADIENT_1,

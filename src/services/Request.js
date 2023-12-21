@@ -42,10 +42,11 @@ export const postRequestForm = async (url, token, body = {}, headers = {}) => {
   await axios
     .post(baseURL + url, body, config)
     .then((result) => {
+        console.log("result", result);
       returnValue = { result: result, error: null };
     })
     .catch((err) => {
-      returnValue = { result: null, error: err };
+      returnValue = { result: err.response, error: null };
     });
   return returnValue;
 };

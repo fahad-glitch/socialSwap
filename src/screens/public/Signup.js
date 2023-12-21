@@ -8,7 +8,7 @@ import {
   ScrollView,
 } from "react-native";
 import { CustomStatusBar } from "../../Router";
-import { BODY, GRADIENT_1 } from "../../constants/Color";
+import { BACKGROUND, GRADIENT_1 } from "../../constants/Color";
 import PublicHeader from "../../components/PublicHeader";
 import PublicMain from "../../components/PublicMain";
 import InputField from "../../components/InputField";
@@ -210,7 +210,7 @@ export default function SignUp() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: BODY,
+    backgroundColor: BACKGROUND,
   },
   forgetPassword: {
     color: GRADIENT_1,

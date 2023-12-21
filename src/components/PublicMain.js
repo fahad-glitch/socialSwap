@@ -1,11 +1,11 @@
 import React from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native';
-import { BODY } from '../constants/Color';
+import { BACKGROUND } from '../constants/Color';
 
 export default function PublicMain({children,flexAmount,paddingAmount}) {
 
   return (
-    <View style={[paddingAmount==20?{padding:20}:{paddingHorizontal: 40},styles.main,{flex:flexAmount}]}>
+    <View style={[paddingAmount==20?{padding:20}:{paddingHorizontal: 20},styles.main,{flex:flexAmount}]}>
         {children}
     </View>
   )
@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
       marginTop: -30,
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,
-      backgroundColor: BODY,
+      backgroundColor: BACKGROUND,
     },
 });

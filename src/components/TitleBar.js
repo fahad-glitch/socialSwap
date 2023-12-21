@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         gap:10,
     },
     icon:{
-        backgroundColor: ITEMCOLOR,
+        backgroundColor: "#E5E5E5",
         padding:8,
         borderRadius:50,
     },

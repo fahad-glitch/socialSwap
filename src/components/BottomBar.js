@@ -88,7 +88,7 @@ const BottomBar = ({ activeRoute }) => {
         <BottomBarButton
           name="Add"
           active={isActive("Add")}
-          onPress={() => navigation.navigate("AddPost")}
+          onPress={() => navigation.navigate("CreatePost")}
         />
 
         <BottomBarButton

@@ -5,13 +5,14 @@ import Images from "../constants/Image";
 import { View } from "react-native";
 import TitleBar from "./TitleBar";
 import { BACKGROUND, ITEMCOLOR } from "../constants/Color";
+import SimpleHeader from "./SimpleHeader";
 
-export default function Layout({ children }) {
+export default function SimpleLayout({ children, title }) {
   return (
-    <View style={styles.container} >
+    <View style={styles.container}>
       {/* <ImageBackground source={Images.background} style={{ flex: 1 }}> */}
-      <TitleBar />
-      <View style={{ flex: 1 ,backgroundColor: ITEMCOLOR,}}>
+      <SimpleHeader title={title} />
+      <View style={{ flex: 1,backgroundColor: ITEMCOLOR,}}>
         <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
       </View>
       <BottomBar activeRoute="Dashboard" />

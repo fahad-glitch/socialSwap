@@ -19,9 +19,18 @@ import Layout from "../../components/Layout";
 import Images from "../../constants/Image";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faHeart, faGrinHearts, faComment, faCommentAlt, faCommentDots } from "@fortawesome/free-regular-svg-icons";
+import {
+  faHeart,
+  faGrinHearts,
+  faComment,
+  faCommentAlt,
+  faCommentDots,
+} from "@fortawesome/free-regular-svg-icons";
+import { PostItem } from "../../components/PostItem";
+import { useNavigation } from "@react-navigation/native";
 export default function Dashboard() {
   const [like, setLike] = useState(false);
+  const navigate=useNavigation();
   const storyData = [
     {
       name: "Fahad",
@@ -105,70 +114,11 @@ export default function Dashboard() {
       </View>
     );
   };
-  const postItem = ({ item }) => {
-    return (
-      <View style={{ borderRadius: 20, backgroundColor: "white" }}>
-        <View style={styles.postHeader}>
-          <View
-            style={[
-              styles.postFooter,
-              {
-                paddingTop: 0,
-                gap: 10,
-              },
-            ]}
-          >
-            <Image
-              source={item.profileImage}
-              style={{ width: 45, height: 45, borderRadius: 100 }}
-            />
-            <Text style={styles.postTitle}>{item.name}</Text>
-          </View>
-          <Text style={styles.postText}>{item.time}</Text>
-        </View>
-        
-       {item.postImage && <Image source={item.postImage} style={{ width: "100%", height: 300 }} />}
-       {item.postText && <Text style={{paddingTop:7,paddingHorizontal:10,fontFamily:"NunitoSans-SemiBold", fontSize:15, color:BLACK}} >
-          {item.postText}
-          </Text>}
-        <View style={[styles.postFooter,{ padding: 10,}]}>
-          <View
-            style={[
-              styles.postFooter,
-              {
-                gap: 5,
-               
-              },
-            ]}
-          >
-            <TouchableOpacity
-              onPress={handleLike}
-              style={{ alignItems: "center" }}
-            >
-              <FontAwesomeIcon icon={item.likeStatus?faGrinHearts:faHeart} color={GRADIENT_1} size={24} />
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={1}>
-              <Text style={styles.postText}>{item.likes}</Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            style={[
-              styles.postFooter,
-              {
-                gap: 5,
-              },
-            ]}
-          >
-            <FontAwesomeIcon icon={faCommentDots} size={24} color={GRADIENT_1}/>
-            <Text style={styles.postText}>{item.comments}</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  };
+
   return (
+    
     <Layout>
-      <View style={styles.storyContainer}>
+      <View style={styles.storyContainer} >
         <FlatList
           data={storyData}
           renderItem={StoryItem}
@@ -181,7 +131,9 @@ export default function Dashboard() {
       <View style={styles.postContainer}>
         <FlatList
           data={postData}
-          renderItem={postItem}
+          renderItem={({ item }) => {
+            return <PostItem {...item} extraStyle={{borderRadius:20}} />;
+          }}
           keyExtractor={(item, key) => key}
           contentContainerStyle={{ paddingHorizontal: 10, gap: 10 }}
           scrollEnabled={false}
@@ -203,12 +155,10 @@ const styles = StyleSheet.create({
   },
 
   postHeader: {
-    
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     padding: 10,
-
   },
   postText: {
     fontFamily: "NunitoSans-SemiBold",
@@ -225,7 +175,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     gap: 40,
     alignItems: "center",
-    
   },
   postIcon: {
     width: 25,

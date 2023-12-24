@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   StyleSheet,
@@ -16,13 +16,19 @@ import { faImage } from "@fortawesome/free-regular-svg-icons";
 import { faVideoCamera } from "@fortawesome/free-solid-svg-icons";
 
 export default function AddPost() {
+  const [post, setPost] = useState("");
+  const addPostHandler = () => {
+
+    console.log("Post Added",post);
+    setPost("");
+  };
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : null}
       keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
       style={styles.container}
     >
-      <SimpleHeader title="Create Post" />
+      <SimpleHeader title="Create Post" handlePress={addPostHandler} rightButton={true}/>
       <View style={styles.main}>
         <View style={styles.headSection}>
           <Image
@@ -44,6 +50,8 @@ export default function AddPost() {
             placeholder="Write something here..."
             style={styles.inputField}
             multiline={true}
+            value={post}
+            onChangeText={setPost}
           />
         </View>
       </View>
@@ -51,9 +59,6 @@ export default function AddPost() {
         <View style={styles.icon}>
           <FontAwesomeIcon icon={faImage} size={24} />
         </View>
-        {/* <View style={styles.icon}>
-          <Image source={Images.buy} style={styles.image}/>
-        </View> */}
         <View style={styles.icon}>
           <FontAwesomeIcon icon={faVideoCamera} size={24} />
         </View>

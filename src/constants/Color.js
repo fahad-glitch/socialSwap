@@ -6,3 +6,5 @@ export const BACKGROUND ="#FFF";
 export const ITEMCOLOR ="#F6F7F9";
 export const BLACK = "#000";
 export const GREY ="#BDBDBD";
+export const TEXTGREY ="#828282";
+export const WHITE ="#FFF";

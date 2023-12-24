@@ -1,21 +1,23 @@
 import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Images from "../constants/Image";
 import { BACKGROUND, ITEMCOLOR } from "../constants/Color";
+import { useNavigation } from "@react-navigation/native";
 export default function TitleBar() {
+  const navigate = useNavigation();
   return (
     <View style ={styles.headerContainer}>
       <Text style={styles.heading}>Social Swap</Text>
       <View style={styles.child}>
-        <View style={styles.icon}>
+        <TouchableOpacity style={styles.icon}>
           <Image source={Images.Search} style={styles.image}/>
-        </View>
+        </TouchableOpacity>
         {/* <View style={styles.icon}>
           <Image source={Images.buy} style={styles.image}/>
         </View> */}
-        <View style={styles.icon}>
+        <TouchableOpacity style={styles.icon} onPress={()=>navigate.navigate("Message")}>
           <Image source={Images.Send} style={styles.image}/>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

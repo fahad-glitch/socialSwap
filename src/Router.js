@@ -15,6 +15,10 @@ import { BACKGROUND, FILL, FILL_2, GRADIENT_1, GRADIENT_2 } from "./constants/Co
 import Dashboard from "./screens/private/Dashboard";
 import Signup from "./screens/public/Signup";
 import AddPost from "./screens/private/AddPost";
+import Post from "./screens/private/Post";
+import Comment from "./screens/private/Comment";
+import Message from "./screens/private/Message";
+import Chat from "./screens/private/Chat";
 
 export const CustomStatusBar = ({
   backgroundColor,
@@ -93,8 +97,14 @@ const Router = () => {
           <Stack.Screen name="OTP" component={OTP} />
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
           <Stack.Screen name="ChangePassword" component={ChangePassword} /> */}
-          <Stack.Screen name="Dashboard" component={Dashboard} />
-          <Stack.Screen name="CreatePost" component={AddPost} />
+          <Stack.Screen name="Dashboard" component={Dashboard}/>
+          {/* <Stack.Screen name="CreatePost" component={AddPost} options={{animation:"slide_from_bottom"}}/> */}
+          <Stack.Screen name="Post" component={Post} />
+          <Stack.Screen name="Comment" component={Comment} options={{animation:"slide_from_bottom"}}/>
+          <Stack.Screen name="Message" component={Message} options={{animation:"slide_from_right"}}/>
+          <Stack.Screen name="Chat" component={Chat} options={{animation:"slide_from_right"}}/>
+
+          
           
         </Stack.Navigator>
         {/* <CustomBottomBar backgroundColor="white"/> */}

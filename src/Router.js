@@ -20,10 +20,12 @@ import Comment from "./screens/private/Comment";
 import Message from "./screens/private/Message";
 import Chat from "./screens/private/Chat";
 import Notification from "./screens/private/Notification";
+import Explore from "./screens/private/Explore";
+import Profile from "./screens/private/Profile";
 
 export const CustomStatusBar = ({
   backgroundColor,
-  barStyle = "light-content",
+  barStyle = "dark-content",
 }) => {
   const insets = useSafeAreaInsets();
   return (
@@ -82,7 +84,7 @@ const Router = () => {
 //     getProfile();
 //   }, []);
   return (
-    <SafeAreaProvider style={{backgroundColor:GRADIENT_2}}>
+    <SafeAreaProvider style={{backgroundColor:GRADIENT_2,}}>
       <NavigationContainer>
         <CustomStatusBar backgroundColor="transparent" />
         <Stack.Navigator
@@ -93,11 +95,11 @@ const Router = () => {
           }}
         >
           {/* <Stack.Screen name="AppSplashScreen" component={AppSplashScreen} /> */}
-          {/* <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Login" component={Login} />
           <Stack.Screen name="SignUp" component={Signup} />
           <Stack.Screen name="OTP" component={OTP} />
           <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
-          <Stack.Screen name="ChangePassword" component={ChangePassword} /> */}
+          <Stack.Screen name="ChangePassword" component={ChangePassword} />
           <Stack.Screen name="Dashboard" component={Dashboard}/>
           <Stack.Screen name="CreatePost" component={AddPost} options={{animation:"slide_from_bottom"}}/>
           <Stack.Screen name="Post" component={Post} />
@@ -105,6 +107,8 @@ const Router = () => {
           <Stack.Screen name="Message" component={Message} options={{animation:"slide_from_right"}}/>
           <Stack.Screen name="Chat" component={Chat} options={{animation:"slide_from_right"}}/>
           <Stack.Screen name="Notification" component={Notification}/>
+          <Stack.Screen name="Explore" component={Explore}/>
+          <Stack.Screen name="Profile" component={Profile}/>
         </Stack.Navigator>
         {/* <CustomBottomBar backgroundColor="white"/> */}
       </NavigationContainer>

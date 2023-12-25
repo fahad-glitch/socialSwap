@@ -1,24 +1,83 @@
-import React from "react";
-import BottomBar from "./BottomBar";
-import { ImageBackground, ScrollView, StyleSheet } from "react-native";
-import Images from "../constants/Image";
-import { View } from "react-native";
+import React, { useState, useRef } from "react";
+import {
+  Animated,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import TitleBar from "./TitleBar";
-import { BACKGROUND, ITEMCOLOR } from "../constants/Color";
+import BottomBar from "./BottomBar";
+import { ITEMCOLOR } from "../constants/Color";
 
 export default function Layout({ children, isTitle = true }) {
+  const scrollY = useRef(new Animated.Value(0)).current;
+  const [titleBarVisible, setTitleBarVisible] = useState(true);
+  const titleBarHeight = 60; // Change this value based on your TitleBar height
+  const collapseThreshold = 150; // Adjust this threshold for content collapse
+
+  const handleScroll = Animated.event(
+    [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+    {
+      useNativeDriver: false,
+      listener: (event) => {
+        const offsetY = event.nativeEvent.contentOffset.y;
+
+        // Show/hide title bar
+        const titleBarThreshold = 50;
+        setTitleBarVisible(offsetY < titleBarThreshold);
+
+        // Collapse content
+        const contentCollapseThreshold = titleBarHeight + collapseThreshold;
+        if (offsetY > contentCollapseThreshold) {
+          // Perform actions to collapse content
+          // You can update state or trigger any specific logic here
+        }
+      },
+    }
+  );
+
+  const titleBarOpacity = scrollY.interpolate({
+    inputRange: [0, titleBarHeight],
+    outputRange: [1, 0],
+    extrapolate: "clamp",
+  });
+
+  const titleBarTranslateY = scrollY.interpolate({
+    inputRange: [0, titleBarHeight],
+    outputRange: [0, -titleBarHeight],
+    extrapolate: "clamp",
+  });
+
   return (
-    <View style={styles.container} >
-      {/* <ImageBackground source={Images.background} style={{ flex: 1 }}> */}
-      {isTitle && <TitleBar />}
-      <View style={{ flex: 1 ,backgroundColor: ITEMCOLOR,}}>
-        <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
+    <View style={styles.container}>
+      {isTitle && (
+        <Animated.View
+          style={{
+            width: "100%",
+            position: "absolute",
+            zIndex: 5,
+            opacity: titleBarOpacity,
+            transform: [{ translateY: titleBarTranslateY }],
+          }}
+        >
+          <TitleBar />
+        </Animated.View>
+      )}
+      <View style={[{ flex: 1, backgroundColor: ITEMCOLOR }]}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          onScroll={handleScroll}
+          scrollEventThrottle={16}
+          contentContainerStyle={{ marginTop: titleBarHeight }}
+        >
+          {children}
+        </ScrollView>
       </View>
       <BottomBar activeRoute="Dashboard" />
-      {/* </ImageBackground> */}
     </View>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

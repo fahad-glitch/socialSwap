@@ -11,9 +11,9 @@ export default function SimpleLayout({ children, title }) {
   return (
     <View style={styles.container}>
       {/* <ImageBackground source={Images.background} style={{ flex: 1 }}> */}
-      <SimpleHeader title={title} />
+      {title && <SimpleHeader title={title} />}
       <View style={{ flex: 1,backgroundColor: ITEMCOLOR,}}>
-        <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
+        {children}
       </View>
       <BottomBar activeRoute="Dashboard" />
       {/* </ImageBackground> */}

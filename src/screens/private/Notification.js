@@ -8,6 +8,7 @@ import {
   View,
   Switch,
   TouchableWithoutFeedback,
+  Platform,
 } from "react-native";
 import Layout from "../../components/Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
@@ -30,10 +31,13 @@ import Images from "../../constants/Image";
 import BottomBar from "../../components/BottomBar";
 import { Modal } from "react-native";
 import { isEnabled } from "react-native/Libraries/Performance/Systrace";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function Notification() {
   const [openSetting, setOpenSetting] = useState(false);
   const [isEnable, setIsEnable] = useState(false);
+  const inset = useSafeAreaInsets();
+  const height= inset.top;
   const notificationData = [
     {
       profileImage: Images.profileSample,
@@ -121,18 +125,23 @@ export default function Notification() {
         showsVerticalScrollIndicator={false}
       />
       <BottomBar activeRoute="Dashboard" />
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={openSetting}
-        style={{ justifyContent: "flex-end" }}
-      >
-        <TouchableWithoutFeedback onPress={() => {setOpenSetting(false)}}>
-          <View style={[styles.modalContainer]}>
+      <Modal animationType="slide" transparent={true} visible={openSetting} statusBarTranslucent={true}>
+        <TouchableWithoutFeedback
+          onPress={() => {
+            setOpenSetting(false);
+          }}
+        >
+          <View
+            style={[
+              styles.modalContainer,
+            ]}
+          >
             <View style={styles.modalBody}>
               <TouchableOpacity
                 style={styles.modalCancel}
-                onPress={() => {setOpenSetting(false)}}
+                onPress={() => {
+                  setOpenSetting(false);
+                }}
               >
                 <FontAwesomeIcon icon={faX} size={16} />
               </TouchableOpacity>
@@ -226,7 +235,7 @@ const styles = StyleSheet.create({
   modalContainer: {
     flex: 1,
     height: "100%",
-    backgroundColor:"rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(0,0,0,0.5)",
     justifyContent: "flex-end",
   },
   modalBody: {
@@ -235,7 +244,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 30,
     borderTopLeftRadius: 30,
     padding: 30,
-    gap:10
+    gap: 10,
   },
   modalItem: {
     flexDirection: "row",
@@ -253,7 +262,7 @@ const styles = StyleSheet.create({
     fontFamily: "NunitoSans-SemiBold",
     fontSize: 20,
     textAlign: "center",
-    paddingVertical:20,
+    paddingVertical: 20,
   },
   modalCancel: {
     position: "absolute",

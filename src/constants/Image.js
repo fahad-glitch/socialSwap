@@ -23,7 +23,7 @@ import heartActive from "../assets/heart.png";
 import heart from "../assets/heart-1.png";
 import comment from "../assets/Iconly/Light/comment.png";
 import SampleImage from "../assets/sampleImage.jpeg";
-
+import Setting from "../assets/Setting.png";
 export default {
   passwordEye,
   facebookFill,
@@ -49,6 +49,7 @@ export default {
   heartActive,
   heart,
   comment,
-  SampleImage
+  SampleImage,
+  Setting,
 
 };

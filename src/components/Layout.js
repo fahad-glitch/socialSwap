@@ -6,11 +6,11 @@ import { View } from "react-native";
 import TitleBar from "./TitleBar";
 import { BACKGROUND, ITEMCOLOR } from "../constants/Color";
 
-export default function Layout({ children }) {
+export default function Layout({ children, isTitle = true }) {
   return (
     <View style={styles.container} >
       {/* <ImageBackground source={Images.background} style={{ flex: 1 }}> */}
-      <TitleBar />
+      {isTitle && <TitleBar />}
       <View style={{ flex: 1 ,backgroundColor: ITEMCOLOR,}}>
         <ScrollView showsVerticalScrollIndicator={false}>{children}</ScrollView>
       </View>

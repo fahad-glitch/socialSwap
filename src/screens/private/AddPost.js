@@ -36,7 +36,7 @@ export default function AddPost() {
             style={{ width: 55, height: 55, borderRadius: 100 }}
           />
           <Text
-            style={{
+            style={{ 
               fontSize: 18,
               paddingTop: 5,
               fontFamily: "NunitoSans-Bold",

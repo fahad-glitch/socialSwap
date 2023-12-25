@@ -116,7 +116,7 @@ export default function Dashboard() {
   };
 
   return (
-    
+
     <Layout>
       <View style={styles.storyContainer} >
         <FlatList
@@ -140,6 +140,8 @@ export default function Dashboard() {
         />
       </View>
     </Layout>
+   
+ 
   );
 }
 const styles = StyleSheet.create({

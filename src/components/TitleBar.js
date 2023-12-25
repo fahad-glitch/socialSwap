@@ -1,7 +1,7 @@
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Images from "../constants/Image";
-import { BACKGROUND, ITEMCOLOR } from "../constants/Color";
+import { BACKGROUND, FILL_2, ITEMCOLOR } from "../constants/Color";
 import { useNavigation } from "@react-navigation/native";
 export default function TitleBar() {
   const navigate = useNavigation();
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
         gap:10,
     },
     icon:{
-        backgroundColor: "#E5E5E5",
+        backgroundColor: FILL_2,
         padding:8,
         borderRadius:50,
     },

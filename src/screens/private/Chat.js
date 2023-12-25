@@ -49,6 +49,31 @@ export default function Chat() {
       message: "Lorem ipsum dolor sit amet conse",
       time: "12:31 PM",
     },
+    {
+      userId: 2,
+      message: "Lorem ipsum dolor sit amet conse",
+      time: "12:31 PM",
+    },
+    {
+      userId: 2,
+      message: "Lorem ipsum dolor sit amet conse",
+      time: "12:31 PM",
+    },
+    {
+        userId: 1,
+        message: "Lorem ipsum dolor sit amet conse",
+        time: "12:30 PM",
+      },
+      {
+        userId: 1,
+        message: "Lorem ipsum dolor sit amet conse",
+        time: "12:30 PM",
+      },
+      {
+      userId: 2,
+      message: "Lorem ipsum dolor sit amet conse kgfwf wuifgwe wiefguwv wifgweuif weiuwegfuiw fiweufgow i",
+      time: "12:31 PM",
+    },
   ];
   const messageItems = ({ item }) => {
     return (
@@ -85,7 +110,7 @@ export default function Chat() {
       <FlatList
         data={messageData}
         renderItem={messageItems}
-        keyExtractor={(item) => item.userId}
+        keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingHorizontal: 10, gap: 10 }}
       />
       <View

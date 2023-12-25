@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.35,
     shadowRadius: 20,
     // For Android
-    // elevation: 5,
+    elevation: 5,
   },
   bottomBar: {
     flexDirection: "row",

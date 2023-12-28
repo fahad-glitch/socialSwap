@@ -56,7 +56,7 @@ export default function Dashboard() {
     },
   ];
 
-  const postData = [
+  const [postData,setPostData] = useState([
     {
       name: "Fahad",
       profileImage: Images.profileSample,
@@ -94,14 +94,14 @@ export default function Dashboard() {
       likeStatus: true,
       time: "1 hour ago",
     },
-  ];
+  ]);
 
   const handleLike = () => {
     //API call
   };
   const StoryItem = ({ item }) => {
     return (
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
+      <TouchableOpacity  style={{ justifyContent: "center", alignItems: "center" }}>
         <Image source={item.profileImage} style={{ width: 80, height: 80 }} />
         {item.flag && (
           <LinearGradient
@@ -116,6 +116,11 @@ export default function Dashboard() {
               alignItems: "center",
             }}
           >
+            <TouchableOpacity
+            onPress={()=>{navigate.navigate("Story")}}
+            >
+
+            
             <Image
               source={Images.add}
               style={{
@@ -125,15 +130,21 @@ export default function Dashboard() {
                 tintColor: "#fff",
               }}
             />
+            </TouchableOpacity>
           </LinearGradient>
         )}
         <Text style={{ fontFamily: "NunitoSans-SemiBold", color: "#000" }}>
           {item.name}
         </Text>
-      </View>
+      </TouchableOpacity>
     );
   };
-
+  const handlelike = (index) => {
+    let temp = [...postData];
+    temp[index].likeStatus = !temp[index].likeStatus;
+    temp[index].likeStatus ? temp[index].likes++ : temp[index].likes--;
+    setPostData(temp);
+}
   return (
 
     <Layout>
@@ -148,7 +159,7 @@ export default function Dashboard() {
         />
       </View>
       <View style={styles.postContainer}>
-        <Posts data={postData} />
+        <Posts data={postData} handlelike={handlelike} />
       </View>
     </Layout>
    

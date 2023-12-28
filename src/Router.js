@@ -11,7 +11,14 @@ import Login from "./screens/public/Login";
 import ForgetPassword from "./screens/public/ForgetPassword";
 import ChangePassword from "./screens/private/ChangePassword";
 import OTP from "./screens/public/OTP";
-import { BACKGROUND, FILL, FILL_2, GRADIENT_1, GRADIENT_2 } from "./constants/Color";
+import {
+  BACKGROUND,
+  FILL,
+  FILL_2,
+  GRADIENT_1,
+  GRADIENT_2,
+  WHITE,
+} from "./constants/Color";
 import Dashboard from "./screens/private/Dashboard";
 import Signup from "./screens/public/Signup";
 import AddPost from "./screens/private/AddPost";
@@ -22,15 +29,17 @@ import Chat from "./screens/private/Chat";
 import Notification from "./screens/private/Notification";
 import Explore from "./screens/private/Explore";
 import Profile from "./screens/private/Profile";
+import Story from "./screens/private/Story";
+import EditProfile from "./screens/private/EditProfile";
+import ResetPassword from "./screens/public/ResetPassword";
 
 export const CustomStatusBar = ({
   backgroundColor,
-  barStyle = "dark-content",
+  barStyle = "light-content",
 }) => {
   const insets = useSafeAreaInsets();
   return (
     <View
-      
       style={{
         height: insets.top,
       }}
@@ -54,7 +63,7 @@ export const CustomStatusBar = ({
 //   const insets = useSafeAreaInsets();
 //   return (
 //     <View
-      
+
 //       style={{
 //         height: insets.bottom,
 //       }}
@@ -71,22 +80,70 @@ export const CustomStatusBar = ({
 //   );
 // };
 const Stack = createNativeStackNavigator();
+const AuthStack = createNativeStackNavigator();
+const PrivateStack = createNativeStackNavigator();
+
+const AuthStackScreen = () => {
+  return (
+    <>
+      <CustomStatusBar backgroundColor={GRADIENT_2} />
+
+      <AuthStack.Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: "none",
+        }}
+      >
+        <AuthStack.Screen name="Login" component={Login} />
+        <AuthStack.Screen name="SignUp" component={Signup} />
+        <AuthStack.Screen name="OTP" component={OTP} />
+        <AuthStack.Screen name="ForgetPassword" component={ForgetPassword} />
+        <AuthStack.Screen name="ChangePassword" component={ResetPassword} />
+      </AuthStack.Navigator>
+    </>
+  );
+};
+const PrivateStackScreen = () => {
+  return (
+    <>
+      <CustomStatusBar backgroundColor={WHITE} barStyle="dark-content" />
+      <PrivateStack.Navigator
+        screenOptions={{
+          headerShown: false,
+          animation: "none",
+        }}
+      >
+        <PrivateStack.Screen name="Dashboard" component={Dashboard} />
+        <PrivateStack.Screen name="CreatePost" component={AddPost} options={{animation:"slide_from_bottom"}} />
+        <PrivateStack.Screen name="Post" component={Post} />
+        <PrivateStack.Screen name="Comment" component={Comment} options={{animation:"slide_from_bottom"}}/>
+        <PrivateStack.Screen name="Message" component={Message} options={{animation:"slide_from_right"}}/>
+        <PrivateStack.Screen name="Chat" component={Chat} />
+        <PrivateStack.Screen name="Notification" component={Notification} />
+        <PrivateStack.Screen name="Explore" component={Explore} />
+        <PrivateStack.Screen name="Profile" component={Profile} />
+        <PrivateStack.Screen name="Story" component={Story} options={{animation:"slide_from_bottom"}} />
+        <PrivateStack.Screen name="EditProfile" component={EditProfile} options={{animation:"slide_from_bottom"}} />
+
+      </PrivateStack.Navigator>
+    </>
+  );
+};
 
 const Router = () => {
   const [initialRouteName, setInitialRouteName] = useState("Login");
-//   const getProfile = async () => {
-//     let data = await getData("USER");
-//     if (data) {
-//       setInitialRouteName("Home");
-//     }
-//   };
-//   useEffect(() => {
-//     getProfile();
-//   }, []);
+  //   const getProfile = async () => {
+  //     let data = await getData("USER");
+  //     if (data) {
+  //       setInitialRouteName("Home");
+  //     }
+  //   };
+  //   useEffect(() => {
+  //     getProfile();
+  //   }, []);
   return (
-    <SafeAreaProvider style={{backgroundColor:GRADIENT_2,}}>
+    <SafeAreaProvider style={{ backgroundColor: GRADIENT_2 }}>
       <NavigationContainer>
-        <CustomStatusBar backgroundColor="transparent" />
         <Stack.Navigator
           initialRouteName={initialRouteName}
           screenOptions={{
@@ -94,23 +151,9 @@ const Router = () => {
             animation: "none",
           }}
         >
-          {/* <Stack.Screen name="AppSplashScreen" component={AppSplashScreen} /> */}
-          <Stack.Screen name="Login" component={Login} />
-          <Stack.Screen name="SignUp" component={Signup} />
-          <Stack.Screen name="OTP" component={OTP} />
-          <Stack.Screen name="ForgetPassword" component={ForgetPassword} />
-          <Stack.Screen name="ChangePassword" component={ChangePassword} />
-          <Stack.Screen name="Dashboard" component={Dashboard}/>
-          <Stack.Screen name="CreatePost" component={AddPost} options={{animation:"slide_from_bottom"}}/>
-          <Stack.Screen name="Post" component={Post} />
-          <Stack.Screen name="Comment" component={Comment} options={{animation:"slide_from_bottom"}}/>
-          <Stack.Screen name="Message" component={Message} options={{animation:"slide_from_right"}}/>
-          <Stack.Screen name="Chat" component={Chat} options={{animation:"slide_from_right"}}/>
-          <Stack.Screen name="Notification" component={Notification}/>
-          <Stack.Screen name="Explore" component={Explore}/>
-          <Stack.Screen name="Profile" component={Profile}/>
+          {/* <Stack.Screen name="Auth" component={AuthStackScreen} /> */}
+          <Stack.Screen name="Home" component={PrivateStackScreen} />
         </Stack.Navigator>
-        {/* <CustomBottomBar backgroundColor="white"/> */}
       </NavigationContainer>
     </SafeAreaProvider>
   );

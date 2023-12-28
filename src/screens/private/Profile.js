@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Image,
   ImageBackground,
@@ -12,14 +12,21 @@ import {
 import SimpleLayout from "../../components/SimpleLayout";
 import Images from "../../constants/Image";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { BACKGROUND, BLACK, FILL_2, TEXTGREY } from "../../constants/Color";
+import { BACKGROUND, BLACK, FILL_2, GREY, TEXTGREY } from "../../constants/Color";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
 import { TabView } from "react-native-tab-view";
 import Posts from "../../components/Posts";
 import { ScrollView } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import * as FileSystem from "expo-file-system";
+import * as mime from "mime";
+import { useNavigation } from "@react-navigation/native";
 export default function Profile() {
   const inset = useSafeAreaInsets();
+  const [image, setImage] = useState(null);
+  const [profileImage, setProfileImage] = useState(null);
+  const navigate = useNavigation();
   const postData = [
     {
       name: "Fahad",
@@ -60,19 +67,56 @@ export default function Profile() {
     },
   ];
 
+  const pickImage = async () => {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+      const file = await uriToFile(result.assets[0].uri);
+      setProfileImage(file);
+    }
+  };
+
+  async function uriToFile(uri) {
+    const fileInfo = await FileSystem.getInfoAsync(uri);
+    const mimeType = mime.getType(uri);
+    const fileContents = await FileSystem.readAsStringAsync(uri, {
+      encoding: FileSystem.EncodingType.Base64,
+    });
+    return {
+      uri,
+      name: fileInfo.uri.split("/").pop(),
+      type: mimeType,
+      data: fileContents,
+    };
+  }
   return (
     <SimpleLayout style={styles.container}>
       <ScrollView>
         <View>
           <ImageBackground
             source={Images.SampleImage}
-            style={[styles.headContainer, { paddingTop: -inset.top }]}
+            style={[styles.headContainer]}
             borderBottomLeftRadius={30}
             borderBottomRightRadius={30}
           >
-            <View style={styles.imageContainer}>
+            {/* <TouchableOpacity onPress={{}} style={styles.imageContainer}>
               <Image source={Images.profileSample} style={styles.Image} />
-            </View>
+            </TouchableOpacity> */}
+            {image ? (
+          <TouchableOpacity style={styles.imageContainer} onPress={pickImage}>
+            <Image source={{ uri: image }} style={styles.Image} />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity style={styles.imageContainer} onPress={pickImage}>
+            <Text style={styles.imagePlaceholder}>Add Image</Text>
+          </TouchableOpacity>
+        )}
           </ImageBackground>
           <View style={styles.textContainer}>
             <Text style={styles.name}>Fahad</Text>
@@ -88,6 +132,9 @@ export default function Profile() {
                 paddingVertical: 10,
                 borderRadius: 10,
                 alignItems: "center",
+              }}
+              onPress={() => {
+                navigate.navigate("EditProfile");
               }}
             >
               <Text style={[styles.name, { fontSize: 18 }]}>Edit Profiles</Text>
@@ -148,8 +195,8 @@ const styles = StyleSheet.create({
     backgroundColor: BACKGROUND,
   },
   Image: {
-    width: 120,
-    height: 120,
+    width: 130,
+    height: 130,
     borderRadius: 100,
   },
   imageContainer: {
@@ -158,6 +205,17 @@ const styles = StyleSheet.create({
     zIndex: 100,
     marginTop: -50,
     backgroundColor: "transparent",
+    width: 130,
+    height: 130,
+    borderRadius: 100,
+    justifyContent: "center",
+    alignSelf: "center",
+    textAlign: "center",
+    backgroundColor: GREY,
+  },
+  imagePlaceholder: {
+    color: "#777",
+    textAlign: "center",
   },
   textContainer: {
     paddingTop: 60,

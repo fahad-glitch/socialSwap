@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Animated,
   ScrollView,
@@ -8,9 +8,12 @@ import {
 import TitleBar from "./TitleBar";
 import BottomBar from "./BottomBar";
 import { ITEMCOLOR } from "../constants/Color";
+import { useRoute } from "@react-navigation/native";
 
 export default function Layout({ children, isTitle = true }) {
   const scrollY = useRef(new Animated.Value(0)).current;
+  const route = useRoute();
+  const [screenName, setScreenName] = useState("");
   const [titleBarVisible, setTitleBarVisible] = useState(true);
   const titleBarHeight = 60; // Change this value based on your TitleBar height
   const collapseThreshold = 150; // Adjust this threshold for content collapse
@@ -48,6 +51,10 @@ export default function Layout({ children, isTitle = true }) {
     extrapolate: "clamp",
   });
 
+  useEffect(()=>{
+    setScreenName(route.name)
+  },[route]);
+
   return (
     <View style={styles.container}>
       {isTitle && (
@@ -73,7 +80,7 @@ export default function Layout({ children, isTitle = true }) {
           {children}
         </ScrollView>
       </View>
-      <BottomBar activeRoute="Dashboard" />
+      <BottomBar activeRoute={screenName} />
     </View>
   );
 }

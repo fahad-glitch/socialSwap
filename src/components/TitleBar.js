@@ -9,7 +9,7 @@ export default function TitleBar() {
     <View style ={styles.headerContainer}>
       <Text style={styles.heading}>Social Swap</Text>
       <View style={styles.child}>
-        <TouchableOpacity style={styles.icon}>
+        <TouchableOpacity style={styles.icon} onPress={()=>navigate.navigate("Explore")}>
           <Image source={Images.Search} style={styles.image}/>
         </TouchableOpacity>
         {/* <View style={styles.icon}>

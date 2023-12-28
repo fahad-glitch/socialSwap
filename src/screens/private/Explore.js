@@ -11,7 +11,7 @@ import {
 import SimpleLayout from "../../components/SimpleLayout";
 import SearchHeader from "../../components/SearchHeader";
 import SearchModal from "../../components/SearchModal";
-import { WHITE } from "../../constants/Color";
+import { GRADIENT_2, WHITE } from "../../constants/Color";
 import Posts from "../../components/Posts";
 import Images from "../../constants/Image";
 export default function Explore() {
@@ -66,6 +66,9 @@ export default function Explore() {
         }}
       />
       <SimpleLayout>
+        <Text style={{fontSize: 25, fontFamily: "NunitoSans-Bold", paddingHorizontal:10,marginVertical: 10 }}>
+          Trending
+        </Text>
         <Posts data={postData} scrollEnabled={true}/>
       </SimpleLayout>
       <SearchModal

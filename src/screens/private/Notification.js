@@ -32,6 +32,7 @@ import BottomBar from "../../components/BottomBar";
 import { Modal } from "react-native";
 import { isEnabled } from "react-native/Libraries/Performance/Systrace";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import SimpleLayout from "../../components/SimpleLayout";
 
 export default function Notification() {
   const [openSetting, setOpenSetting] = useState(false);
@@ -99,6 +100,9 @@ export default function Notification() {
   );
   return (
     <View style={{ flex: 1, backgroundColor: BACKGROUND }}>
+      <SimpleLayout extraStyle={{backgroundColor:BACKGROUND}}>
+
+     
       <View style={styles.headerContainer}>
         <View style={{ flexDirection: "row" }}>
           <Text style={styles.headerText}>Notification </Text>
@@ -113,6 +117,7 @@ export default function Notification() {
           <Image source={Images.Setting} style={{ width: 26, height: 26 }} />
         </TouchableOpacity>
       </View>
+      
       <FlatList
         data={notificationData}
         renderItem={notificationItem}
@@ -124,7 +129,7 @@ export default function Notification() {
         }}
         showsVerticalScrollIndicator={false}
       />
-      <BottomBar activeRoute="Dashboard" />
+      </SimpleLayout>
       <Modal animationType="slide" transparent={true} visible={openSetting} statusBarTranslucent={true}>
         <TouchableWithoutFeedback
           onPress={() => {

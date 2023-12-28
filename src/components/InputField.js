@@ -105,9 +105,9 @@ export default function InputField({
           />
         </TouchableOpacity>
       )}
-      <Modal transparent={true} visible={showDatePicker} animationType="slide">
+      <Modal transparent={true} visible={showDatePicker} animationType="slide" statusBarTranslucent={true}>
         <View
-          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+          style={{ flex: 1, justifyContent: "center", alignItems: "center",backgroundColor:"rgba(0,0,0,0.5)" }}
         >
           <View
             style={{
@@ -121,9 +121,10 @@ export default function InputField({
           >
             <DatePicker
               selected={date}
-              mode="calender"
+              mode="calendar"
               onDateChange={handleDateChange}
               style={{ backgroundColor: FILL }}
+              
             />
             <TouchableOpacity onPress={() => setShowDatePicker(false)}>
               <Text style={{ fontSize: 17 }}>Close</Text>

@@ -64,7 +64,7 @@ const BottomBar = ({ activeRoute }) => {
           <>
             <Image
               source={imageSource}
-              style={[styles.icon]}
+              style={[styles.icon, active ? {tintColor:GRADIENT_1} : null,name ==="Notification" && active?{height:30,width:30}:null]}
             />
           </>
         )}
@@ -156,6 +156,7 @@ const styles = StyleSheet.create({
     height: 25,
     width: 25,
     resizeMode: "contain",
+    
   },
 });
 

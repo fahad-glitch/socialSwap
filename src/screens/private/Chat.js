@@ -1,14 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   FlatList,
   Image,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  Touchable,
   TouchableOpacity,
   View,
 } from "react-native";
@@ -34,6 +32,7 @@ export default function Chat() {
   const routes = useRoute();
   const inset = useSafeAreaInsets();
   const [user, setUser] = useState(null);
+  const scrollRef = useRef();
 
   useEffect(() => {
     setUser(routes.params.user);
@@ -60,18 +59,58 @@ export default function Chat() {
       time: "12:31 PM",
     },
     {
-        userId: 1,
-        message: "Lorem ipsum dolor sit amet conse",
-        time: "12:30 PM",
-      },
-      {
-        userId: 1,
-        message: "Lorem ipsum dolor sit amet conse",
-        time: "12:30 PM",
-      },
-      {
+      userId: 1,
+      message: "Lorem ipsum dolor sit amet conse",
+      time: "12:30 PM",
+    },
+    {
+      userId: 1,
+      message: "Lorem ipsum dolor sit amet conse",
+      time: "12:30 PM",
+    },
+    {
       userId: 2,
-      message: "Lorem ipsum dolor sit amet conse kgfwf wuifgwe wiefguwv wifgweuif weiuwegfuiw fiweufgow i",
+      message:
+        "Lorem ipsum dolor sit amet conse kgfwf wuifgwe wiefguwv wifgweuif weiuwegfuiw fiweufgow i",
+      time: "12:31 PM",
+    },
+    {
+      userId: 1,
+      message: "Lorem ipsum dolor sit amet conse",
+      time: "12:30 PM",
+    },
+    {
+      userId: 2,
+      message:
+        "Lorem ipsum dolor sit amet conse kgfwf wuifgwe wiefguwv wifgweuif weiuwegfuiw fiweufgow i",
+      time: "12:31 PM",
+    },
+    {
+      userId: 1,
+      message: "Lorem ipsum dolor sit amet conse",
+      time: "12:30 PM",
+    },
+    {
+      userId: 2,
+      message:
+        "Lorem ipsum dolor sit amet conse kgfwf wuifgwe wiefguwv wifgweuif weiuwegfuiw fiweufgow i",
+      time: "12:31 PM",
+    },
+    {
+      userId: 1,
+      message: "Lorem ipsum dolor sit amet conse",
+      time: "12:30 PM",
+    },
+    {
+      userId: 2,
+      message:
+        "Lorem ipsum dolor sit amet conse kgfwf wuifgwe wiefguwv wifgweuif weiuwegfuiw fiweufgow i",
+      time: "12:31 PM",
+    },
+    {
+      userId: 2,
+      message:
+        "Lorem ipsum dolor sit amet conse kgfwf wuifgwe wiefguwv wifgweuif weiuwegfuiw fiweufgow i",
       time: "12:31 PM",
     },
   ];
@@ -80,7 +119,7 @@ export default function Chat() {
       <View
         style={[
           styles.messageContainer,
-          item.userId === 2 && {flexDirection:"row-reverse" },
+          item.userId === 2 && { flexDirection: "row-reverse" },
         ]}
       >
         <Image source={Images.profileSample} style={styles.profileImage} />
@@ -112,6 +151,10 @@ export default function Chat() {
         renderItem={messageItems}
         keyExtractor={(item) => item.id}
         contentContainerStyle={{ paddingHorizontal: 10, gap: 10 }}
+        ref={(it) => (scrollRef.current = it)}
+        onContentSizeChange={() =>
+          scrollRef.current?.scrollToEnd({ animated: true })
+        }
       />
       <View
         style={[

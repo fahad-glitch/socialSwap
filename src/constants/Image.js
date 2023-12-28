@@ -12,7 +12,7 @@ import explore from "../assets/Iconly/Bold/Category-1.png";
 import notification from "../assets/Iconly/Light/Notification-1.png";
 import profile from "../assets/Iconly/Light/Profile-1.png";
 import exploreActive from "../assets/Iconly/Bold/Category.png";
-import notificationActive from "../assets/Iconly/Light/Notification.png";
+import notificationActive from "../assets/Notification.png";
 import profileActive from "../assets/Iconly/Light/Profile.png";
 import buy from "../assets/Buy.png";
 import Search from "../assets/Search.png";
